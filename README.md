@@ -16,7 +16,7 @@ Se incluye las clases de las librarías MITyCLib por firmas con XAdES BES -
 los que no son disponibles por MavenCentral.
 
 Aparte de la libraría `sri-efactura-core`, este repositorio se incluye también una utilidad de
-línea de comandos por pruebas/depuración: ver [sri-soap-cli](sri-soap-cli/README.md)
+línea de comandos por pruebas/depuración: ver [sri-soap-cli](sri-soap-cli)
 
 
 ## Construir la libraría sri-efactura-core :hammer_and_wrench:
@@ -71,10 +71,10 @@ dependencies {
 
     // if performing validation using the jakarta.validation annotations:
     runtimeOnly("org.hibernate.validator:hibernate-validator:7.0.5.Final") {
-        because("Runtime implementation of jakarta.validation used by JaxbComprobantePublisher.")
+        because("Runtime provider of jakarta.validation.Validator.")
     }
     runtimeOnly("org.glassfish:jakarta.el:4.0.2") {
-        because("Expression Language implementation needed for jakarta.validation implementation.")
+        because("Runtime Expression Language implementation needed by jakarta.validation.Validator.")
     }
 
     // if signing comprobantes using XAdESBESSignature: 
