@@ -50,7 +50,7 @@ tasks.shadowJar {
 mavenArtifact {
     artifactId = "sri-efactura-core"
     artifactName = "SRI efactura core"
-    artifactDescription = "Core classes for creating, signing and authorising comprobantes electrónicos via the web services of SRI in Ecuador"
+    artifactDescription = "Core classes for creating, signing and authorising comprobantes electrónicos via web services of SRI in Ecuador"
 }
 
 /*
