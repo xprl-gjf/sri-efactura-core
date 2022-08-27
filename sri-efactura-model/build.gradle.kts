@@ -8,11 +8,11 @@ plugins {
 }
 
 repositories {
-    // TODO: remove this once my pull request for krasa-jaxb-tools has been merged and published.
-    // See (https://github.com/fillumina/krasa-jaxb-tools/pull/3)
+    // TODO: remove this if/when upstream krasa-jaxb-tools incorporates jakarta libraries.
+    // See (https://github.com/fillumina/krasa-jaxb-tools/pull/2)
     mavenLocal {
         content {
-            includeGroup("com.fillumina")
+            includeGroup("ec.com.xprl")
         }
     }
     mavenCentral()
@@ -23,7 +23,7 @@ dependencies {
     api("jakarta.validation:jakarta.validation-api:3.0.2")
     jaxXjc("com.sun.xml.bind:jaxb-xjc:4.0.0")
     jaxXjc("com.sun.xml.bind:jaxb-impl:4.0.0")
-    jaxXjc("com.fillumina:krasa-jaxb-tools:2.3-SNAPSHOT") {
+    jaxXjc("ec.com.xprl:krasa-jaxb-tools:2.3-SNAPSHOT") {
         because("xjc plugin to apply jakarta.validation annotations. " +
                 "Built from https://github.com/xprl-gjf/krasa-jaxb-tools.")
     }
