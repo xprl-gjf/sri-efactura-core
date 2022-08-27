@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<factura id="comprobante" version="1.0.0">
+	<infoTributaria>
+		<ambiente>1</ambiente>
+		<tipoEmision>1</tipoEmision>
+		<razonSocial>Clinica</razonSocial>
+		<ruc>1797727739001</ruc>
+		<claveAcceso>2006201401179772773900110010010010320580103205813</claveAcceso>
+		<codDoc>01</codDoc>
+		<estab>001</estab>
+		<ptoEmi>001</ptoEmi>
+		<secuencial>001032058</secuencial>
+		<dirMatriz>Calle A 8392835</dirMatriz>
+	</infoTributaria>
+	<infoFactura>
+		<fechaEmision>20/06/2014</fechaEmision>
+		<dirEstablecimiento>Calle A 8392835</dirEstablecimiento>
+		<contribuyenteEspecial></contribuyenteEspecial>
+		<obligadoContabilidad>SI</obligadoContabilidad>
+		<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+		<razonSocialComprador>GARCIA  RIVADENEIRA MANUEL  GONZALO</razonSocialComprador>
+		<identificacionComprador>1701971408</identificacionComprador>
+		<totalSinImpuestos>60.00</totalSinImpuestos>
+		<totalDescuento>0.00</totalDescuento>
+		<totalConImpuestos>
+							<totalImpuesto>
+					<codigo>2</codigo>
+					<codigoPorcentaje>0</codigoPorcentaje>
+					<baseImponible>60.00000</baseImponible>
+					<tarifa>0.00</tarifa>
+					<valor>0.00</valor>
+				</totalImpuesto>
+
+
+		</totalConImpuestos>
+		<propina>0.00</propina>
+		<importeTotal>60.00</importeTotal>
+		<moneda>DOLAR</moneda>
+	</infoFactura>
+	<detalles>
+				<detalle>
+			<codigoPrincipal>EC002</codigoPrincipal>
+			<descripcion>ECOGRAMA ABDOMEN SUPERIOR</descripcion>
+			<cantidad>1.00</cantidad>
+			<precioUnitario>60.00000</precioUnitario>
+			<descuento>0.00</descuento>
+			<precioTotalSinImpuesto>60.00000</precioTotalSinImpuesto>
+			<impuestos>
+				<impuesto>
+					<codigo>2</codigo>
+					<codigoPorcentaje>0</codigoPorcentaje>
+					<tarifa>0</tarifa>
+					<baseImponible>60.00000</baseImponible>
+					<valor>0.00</valor>
+				</impuesto>
+			</impuestos>
+		</detalle>
+
+	</detalles>
+	<infoAdicional>
+            <campoAdicional nombre="email">gromanec@hotmail.com</campoAdicional>
+            <campoAdicional nombre="direccion">Isla Seymour 144 y Gaspar de Villarroel</campoAdicional>
+            <campoAdicional nombre="telefono">0987840639</campoAdicional>
+	</infoAdicional>
+</factura>

@@ -1,0 +1,6 @@
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
+    <public publicId="-//W3C//DTD XMLSchema 200102//EN"
+        uri="XMLSchema.dtd" />
+    <system systemId="datatypes.dtd"
+        uri="datatypes.dtd" />
+</catalog>

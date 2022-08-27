@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+          jaxb:extensionBindingPrefixes="xjc"
+          version="3.0">
+    <jaxb:bindings schemaLocation="NotaCredito_V1.1.0.xsd" node="/xsd:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="ec.gob.sri.credito.v1_1_0"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+    <jaxb:bindings schemaLocation="xmldsig-core-schema.xsd" node="/xsd:schema">
+        <jaxb:schemaBindings>
+            <jaxb:package name="org.w3.xmldsig"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+</jaxb:bindings>
