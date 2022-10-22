@@ -1,87 +1,150 @@
 package ec.com.xprl.efactura;
 
-import es.mityc.firmaJava.libreria.utilidades.UtilidadTratarNodo;
-import es.mityc.firmaJava.libreria.xades.DataToSign;
-import es.mityc.firmaJava.libreria.xades.FirmaXML;
-import es.mityc.javasign.pkstore.CertStoreException;
-import es.mityc.javasign.pkstore.IPKStoreManager;
-import es.mityc.javasign.pkstore.keystore.KSStore;
 import java.io.*;
-import java.security.*;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+
+import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import xades4j.XAdES4jException;
+import xades4j.algorithms.CanonicalXMLWithoutComments;
+import xades4j.production.*;
+import xades4j.providers.KeyingDataProvider;
+import xades4j.providers.impl.FileSystemKeyStoreKeyingDataProvider;
+import xades4j.providers.impl.KeyStoreKeyingDataProvider;
+
+import static org.apache.xml.security.algorithms.MessageDigestAlgorithm.ALGO_ID_DIGEST_SHA1;
+import static org.apache.xml.security.signature.XMLSignature.ALGO_ID_SIGNATURE_RSA_SHA1;
 
 public abstract class GenericXMLSignature {
+    /**
+     * Firmar los datos creados por el método abstracto <code>createDataToSign</code>
+     * mediante el primer certificado encontré en el <code>firmaClienteKeyStore</code>.
+     * El resultado del proceso de firma será devuelto como un DOM Document.
+     * <p>
+     * Uso este método cuando ni el KeyStore ni el certificado en el KeyStore
+     * necesitan una contraseña.
+     * </p>
+     * @param archivo el contenido del documento para estar firmado.
+     * @param firmaClienteKeyStore el KeyStore que contiene el certificado para la firma.
+     * @param descripcion la descripción de los datos firmados (opcional).
+     * @return el documento firmado.
+     * @throws Exception el proceso de firmar el documento falló.
+     */
+    protected @NotNull Document execute(
+            byte @NotNull [] archivo,
+            @NotNull File firmaClienteKeyStore,
+            String descripcion) throws Exception {
+        return execute(
+            archivo, firmaClienteKeyStore, null, null, descripcion
+        );
+    }
 
     /**
+     * Firmar los datos creados por el método abstracto <code>createDataToSign</code>
+     * mediante el primer certificado encontré en el <code>firmaClienteKeyStore</code>.
+     * El resultado del proceso de firma será devuelto como un DOM Document.
      * <p>
-     * Ejecución del ejemplo. La ejecución consistirá en la firma de los datos
-     * creados por el método abstracto <code>createDataToSign</code> mediante el
-     * certificado declarado en la constante <code>PKCS12_FILE</code>. El
-     * resultado del proceso de firma será almacenado en un fichero XML en el
-    
-     * directorio correspondiente a la constante <code>OUTPUT_DIRECTORY</code>
-     * del usuario bajo el nombre devuelto por el método abstracto
-     * <code>getSignFileName</code>
+     * Uso este método cuando una contraseña es necesario para abrir el KeyStore,
+     * pero no hay contraseña por el certificado en el KeyStore.
      * </p>
+     * @param archivo el contenido del documento para estar firmado.
+     * @param firmaClienteKeyStore el KeyStore que contiene el certificado para la firma.
+     * @param keyStoreClave la contraseña para abrir el KeyStore.
+     * @param descripcion la descripción de los datos firmados (opcional).
+     * @return el documento firmado.
+     * @throws Exception el proceso de firmar el documento falló.
      */
-    protected Document execute(byte[] archivo, byte[] firmaCliente, String clave, String descripcion) throws Exception {
+    protected @NotNull Document execute(
+            byte @NotNull [] archivo,
+            @NotNull File firmaClienteKeyStore,
+            String keyStoreClave,
+            String descripcion) throws Exception {
+        return execute(
+            archivo, firmaClienteKeyStore, keyStoreClave, null, descripcion
+        );
+    }
+
+    /**
+     * Firmar los datos creados por el método abstracto <code>createDataToSign</code>
+     * mediante el primer certificado encontré en el <code>firmaClienteKeyStore</code>.
+     * El resultado del proceso de firma será devuelto como un DOM Document.
+     * <p>
+     * Uso este método cuando una contraseña es necesario para abrir el KeyStore,
+     * pero no hay contraseña por el certificado en el KeyStore.
+     * </p>
+     * @param archivo el contenido del documento para estar firmado.
+     * @param firmaClienteKeyStore el KeyStore que contiene el certificado para la firma.
+     * @param keyStoreClave la contraseña para abrir el KeyStore.
+     * @param keyStoreEntryClave la contraseña por el certificado.
+     * @param descripcion la descripción de los datos firmados (opcional).
+     * @return el documento firmado.
+     * @throws Exception el proceso de firmar el documento falló.
+     */
+    protected Document execute(
+            byte @NotNull [] archivo,
+            @NotNull File firmaClienteKeyStore,
+            String keyStoreClave,
+            @SuppressWarnings("SameParameterValue")
+            String keyStoreEntryClave,
+            String descripcion) throws Exception {
 
         // Obtencion del gestor de claves
-        IPKStoreManager storeManager = getPKStoreManager(firmaCliente, clave);
-        if (storeManager == null) {
-            throw new Exception("El gestor de claves no se ha obtenido correctamente.");
-        }
+        KeyingDataProvider kp = getKeyingDataProvider(firmaClienteKeyStore, keyStoreClave, keyStoreEntryClave);
 
-        // Obtencion del certificado para firmar. Utilizaremos el primer
-        // certificado del almacen.
-        X509Certificate certificate = getFirstCertificate(storeManager);
-        if (certificate == null) {
-            throw new Exception("No existe ningún certificado para firmar.");
-        }
-
-        // Obtención de la clave privada asociada al certificado
-        PrivateKey privateKey;
-        try {
-            privateKey = storeManager.getPrivateKey(certificate);
-        } catch (CertStoreException e) {
-            throw new Exception("Error al acceder al almacén. "+e.toString());
-        }
-
-        // Obtención del provider encargado de las labores criptográficas
-        Provider provider = storeManager.getProvider(certificate);
+        // Obtencion del firmador
+        XadesSigningProfile p = getXadesSigningProfile(kp)
+                .withSignatureAlgorithms(new SignatureAlgorithms()
+                    .withSignatureAlgorithm("RSA", ALGO_ID_SIGNATURE_RSA_SHA1)
+                    .withDigestAlgorithmForDataObjectReferences(ALGO_ID_DIGEST_SHA1)
+                    .withCanonicalizationAlgorithmForSignature(new CanonicalXMLWithoutComments())
+                    .withDigestAlgorithmForReferenceProperties(ALGO_ID_DIGEST_SHA1))
+                .withBasicSignatureOptions(new BasicSignatureOptions()
+                    .signKeyInfo(true)
+                    .includePublicKey(true)
+                    .includeSigningCertificate(SigningCertificateMode.FULL_CHAIN)
+                );
 
         /*
          * Creación del objeto que contiene tanto los datos a firmar como la
          * configuración del tipo de firma
          */
-        DataToSign dataToSign = createDataToSign(archivo, descripcion);
+        Document doc = getDocument(archivo);
+        SignedDataObjects dataToSign = createDataToSign(doc, descripcion);
+        Element sigParentNode = getSignatureParentNode(doc);
+        if (sigParentNode == null) {
+            throw new IllegalStateException("Documento para firmar no contiene el node descendiente que es necesario.");
+        }
 
-        // Firmamos el documento
-        Document docSigned = null;
         try {
             /*
              * Creación del objeto encargado de realizar la firma
              */
-            FirmaXML firma = createFirmaXML();
-            Object[] res = firma.signFile(certificate, dataToSign, privateKey, provider);
-            docSigned = (Document) res[0];
-        } catch (Exception ex) {
+            XadesSigner signer = p.newSigner();
+            signer.sign(dataToSign, sigParentNode);
+        } catch (XAdES4jException ex) {
             ex.printStackTrace();
-            throw new Exception("Error realizando la firma. "+ex.toString());
+            throw new Exception("Error realizando la firma. ", ex);
         }
-        return docSigned;
+        return doc;
     }
+
+    /**
+     * Generar una implementación del XadesSigningProfile con el KeyingDataProvider
+     * suministrado.
+     * <p>
+     * Todas las implementaciones deberán proporcionar una implementación de este método
+     * </p>
+     *
+     * @param kp el KeyingDataProvider.
+     * @return una implementación del XadesSigningProfile.
+     */
+    protected abstract @NotNull XadesSigningProfile getXadesSigningProfile(KeyingDataProvider kp);
 
     /**
      * <p>
@@ -90,81 +153,21 @@ public abstract class GenericXMLSignature {
      * una implementación de este método
      * </p>
      * 
-     * @return El objeto DataToSign que contiene toda la información de la firma
+     * @return El objeto SignedDataObjects que contiene toda la información de la firma
      *         a realizar
      */
-    protected abstract DataToSign createDataToSign(byte[] archivo, String descripcion) throws Exception;
+    protected abstract @NotNull SignedDataObjects createDataToSign(@NotNull Document document, String descripcion) throws Exception;
 
     /**
+     * Seleccionar el elemento en el documento en que la firma va a estar adjuntado.
      * <p>
-     * Nombre del fichero donde se desea guardar la firma generada. Todas las
-     * implementaciones deberán proporcionar este nombre.
+     * Todas las implementaciones deberán proporcionar una implementación de este método
      * </p>
-     * 
-     * @return El nombre donde se desea guardar la firma generada
+     *
+     * @param document el documento para que el elemento va a estar seleccionado.
+     * @return un elemento, o null si no elemento está valido.
      */
-    protected abstract String getSignatureFileName();
-
-    /**
-     * <p>
-     * Crea el objeto <code>FirmaXML</code> con las configuraciones necesarias
-     * que se encargará de realizar la firma del documento.
-     * </p>
-     * <p>
-     * En el caso más simple no es necesaria ninguna configuración específica.
-     * En otros casos podría ser necesario por lo que las implementaciones
-     * concretas de las diferentes firmas deberían sobreescribir este método
-     * (por ejemplo para añadir una autoridad de sello de tiempo en aquellas
-     * firmas en las que sea necesario)
-     * <p>
-     * 
-     * @return firmaXML Objeto <code>FirmaXML</code> configurado listo para usarse
-     */
-    protected FirmaXML createFirmaXML() {
-        return new FirmaXML();
-    }
-
-    /**
-     * <p>
-     * Escribe el documento a un fichero.
-     * </p>
-     * 
-     * @param document El documento a imprmir
-     * @param pathfile El path del fichero donde se quiere escribir.
-     */
-    public void saveDocumentToFile(Document document, String pathfile) throws Exception {
-        try {
-            FileOutputStream fos = new FileOutputStream(pathfile);
-            UtilidadTratarNodo.saveDocumentToOutputStream(document, fos, true);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new Exception("Error al guardar el documento firmado. "+e.toString());
-        }
-    }
-
-    /**
-     * <p>
-     * Escribe el documento a un fichero. Esta implementacion es insegura ya que
-     * dependiendo del gestor de transformadas el contenido podría ser alterado,
-     * con lo que el XML escrito no sería correcto desde el punto de vista de
-     * validez de la firma.
-     * </p>
-     * 
-     * @param document El documento a imprmir
-     * @param pathfile El path del fichero donde se quiere escribir.
-     */
-    private void saveDocumentToFileUnsafeMode(Document document, String pathfile) throws Exception {
-        TransformerFactory tfactory = TransformerFactory.newInstance();
-        Transformer serializer;
-        try {
-            serializer = tfactory.newTransformer();
-
-            serializer.transform(new DOMSource(document), new StreamResult(new File(pathfile)));
-        } catch (TransformerException e) {
-            e.printStackTrace();
-            throw new Exception("Error al guardar el documento firmado. "+e.toString());
-        }
-    }
+    protected abstract Element getSignatureParentNode(@NotNull Document document);
 
     /**
      * <p>
@@ -175,52 +178,20 @@ public abstract class GenericXMLSignature {
      * @param resource El recurso que se desea obtener
      * @return El <code>Document</code> asociado al <code>resource</code>
      */
-    protected Document getDocument(byte[] resource) throws Exception {
-        Document doc = null;
+    protected @NotNull Document getDocument(byte @NotNull [] resource) throws Exception {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(true);
         try {
         	InputStream b = new ByteArrayInputStream(resource);
-            doc = dbf.newDocumentBuilder().parse(b);
-        } catch (ParserConfigurationException ex) {
+            return dbf.newDocumentBuilder().parse(b);
+        } catch (ParserConfigurationException
+                 | SAXException
+                 | IOException
+                 | IllegalArgumentException ex)
+        {
             ex.printStackTrace();
-            throw new Exception("Error al parsear el documento. "+ex.toString());
-        } catch (SAXException ex) {
-            ex.printStackTrace();
-            throw new Exception("Error al parsear el documento. "+ex.toString());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            throw new Exception("Error al parsear el documento."+ex.toString());
-        } catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
-            throw new Exception("Error al parsear el documento."+ex.toString());
+            throw new Exception("Error al parsear el documento. ", ex);
         }
-        return doc;
-    }
-
-    /**
-     * <p>
-     * Devuelve el contenido del documento XML
-     * correspondiente al <code>resource</code> pasado como parámetro
-     * </p> como un <code>String</code>
-     * 
-     * @param resource El recurso que se desea obtener
-     * @return El contenido del documento XML como un <code>String</code>
-     */
-    protected String getDocumentAsString(byte[] resource) throws Exception {
-        Document doc = getDocument(resource);
-        TransformerFactory tfactory = TransformerFactory.newInstance();
-        Transformer serializer;
-        StringWriter stringWriter = new StringWriter();
-        try {
-            serializer = tfactory.newTransformer();
-            serializer.transform(new DOMSource(doc), new StreamResult(stringWriter));
-        } catch (TransformerException e) {
-            e.printStackTrace();
-            throw new Exception("Error al obtener el contenido del documento. "+e.toString());
-        }
-
-        return stringWriter.toString();
     }
 
     /**
@@ -230,58 +201,35 @@ public abstract class GenericXMLSignature {
      * 
      * @return El gestor de claves que se va a utilizar</p>
      */
-    private IPKStoreManager getPKStoreManager(byte[] firma, String clave) throws Exception {
-        IPKStoreManager storeManager = null;
-        try {
-            InputStream b = new ByteArrayInputStream(firma);
-            
-            KeyStore ks = KeyStore.getInstance("PKCS12");
-            ks.load(b, clave.toCharArray());
-            storeManager = new KSStore(ks, new PassStoreKS(clave));
-            
-//                KeyStore ks = KeyStore.getInstance("JKS");
-//                ks.load(b.getInputStream(), clave.toCharArray());
-//                Provider provider = Security.getProvider("SunRsaSign");
-//                storeManager = new KSStore(ks, provider, new PassStoreKS(clave));
-            
-        } catch (KeyStoreException ex) {
-            ex.printStackTrace();
-            throw new Exception("No se puede generar KeyStore PKCS12. "+ex.toString());
-        } catch (NoSuchAlgorithmException ex) {
-            ex.printStackTrace();
-            throw new Exception("No se puede generar KeyStore PKCS12. "+ex.toString());
-        } catch (CertificateException ex) {
-            ex.printStackTrace();
-            throw new Exception("No se puede generar KeyStore PKCS12. "+ex.toString());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            throw new Exception("No se puede generar KeyStore PKCS12. "+ex.toString());
-        }
-        return storeManager;
-    }
+    private @NotNull KeyingDataProvider getKeyingDataProvider(@NotNull File file, String fileClave, String entryClave) throws Exception {
 
-    /**
-     * <p>
-     * Recupera el primero de los certificados del almacén.
-     * </p>
-     * 
-     * @param storeManager Interfaz de acceso al almacén
-     * @return Primer certificado disponible en el almacén
-     */
-    private X509Certificate getFirstCertificate(
-            final IPKStoreManager storeManager) throws Exception {
-        List certs = null;
-        try {
-            certs = storeManager.getSignCertificates();
-        } catch (CertStoreException ex) {
-            throw new Exception("Fallo obteniendo listado de certificados del cliente. "+ex.toString());
-        }
-        if ((certs == null) || (certs.size() == 0)) {
-            throw new Exception("Lista de certificados de cliente vacía. ");
+        FileSystemKeyStoreKeyingDataProvider.Builder builder = FileSystemKeyStoreKeyingDataProvider
+            .builder("pkcs12", file.getPath(), GenericXMLSignature::SelectFirstCertificate)
+            .fullChain(true);
+
+        if (fileClave != null) {
+            builder.storePassword(new DirectPasswordProvider(fileClave));
+        } else {
+            builder.storePassword(new DirectPasswordProvider(""));
         }
 
-        X509Certificate certificate = (X509Certificate)certs.get(0);
-        return certificate;
+        if (entryClave != null) {
+            builder.entryPassword(new DirectPasswordProvider(entryClave));
+        } else {
+            builder.entryPassword(new DirectPasswordProvider(""));
+        }
+        return builder.build();
     }
-    
+
+    private static @NotNull KeyStoreKeyingDataProvider.SigningCertificateSelector.Entry SelectFirstCertificate(
+        @NotNull List<KeyStoreKeyingDataProvider.SigningCertificateSelector.Entry> entries
+    ) {
+        Optional<KeyStoreKeyingDataProvider.SigningCertificateSelector.Entry> result = entries.stream()
+                .filter(Objects::nonNull)
+                .findFirst();
+        if (!result.isPresent()) {
+            throw new IllegalStateException("No existe ningún certificado para firmar.");
+        }
+        return result.get();
+    }
 }
