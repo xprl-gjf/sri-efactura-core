@@ -78,5 +78,13 @@ publishing {
             url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
         }
          */
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/xprl-gjf/sri-efactura-core")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+            }
+        }
     }
 }

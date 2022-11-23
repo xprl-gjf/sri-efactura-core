@@ -8,12 +8,10 @@ plugins {
 }
 
 repositories {
-    // TODO: remove this if/when upstream krasa-jaxb-tools incorporates jakarta libraries.
-    // See (https://github.com/fillumina/krasa-jaxb-tools/pull/2)
-    mavenLocal {
-        content {
-            includeGroup("ec.com.xprl")
-        }
+    maven {
+        // TODO: remove this if/when upstream krasa-jaxb-tools publishes version 2.3 to mavenCentral.
+        // See (https://github.com/fillumina/krasa-jaxb-tools/pull/2)
+        url=uri("https://jitpack.io")
     }
     mavenCentral()
 }
@@ -23,9 +21,8 @@ dependencies {
     api("jakarta.validation:jakarta.validation-api:3.0.2")
     jaxXjc("com.sun.xml.bind:jaxb-xjc:4.0.0")
     jaxXjc("com.sun.xml.bind:jaxb-impl:4.0.0")
-    jaxXjc("ec.com.xprl:krasa-jaxb-tools:2.3-SNAPSHOT") {
-        because("xjc plugin to apply jakarta.validation annotations. " +
-                "Built from https://github.com/xprl-gjf/krasa-jaxb-tools.")
+    jaxXjc("com.github.fillumina:krasa-jaxb-tools:709066a0fe1438249a014ce6d7da4c5a75bda0b9") {
+        because("xjc plugin to apply jakarta.validation annotations.")
     }
     testCompileOnly("org.jetbrains:annotations:23.0.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
@@ -146,7 +143,8 @@ fun xjcGen(xsd: File, vararg bindings: String): Task {
                         "binding"("dir" to xsdDir, "includes" to bindStr)
                     }
                     "arg"("value" to "-nv")
-                    "arg"( "value" to "-XJsr303Annotations")
+                    "arg"("value" to "-XJsr303Annotations")
+                    "arg"("value" to "-XJsr303Annotations:validationAnnotations=jakarta")
                     "arg"("value" to "-XJsr303Annotations:notNullAnnotationsCustomMessages=ClassName")
                     "arg"("value" to "-XJsr303Annotations:JSR_349=true")
                 }

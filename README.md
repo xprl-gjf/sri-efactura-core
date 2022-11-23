@@ -25,14 +25,8 @@ Prerequisites:
 - JDK >= Java SE 8
 - `ec.com.xprl:krasa-jaxb-tools` v2.3-SNAPSHOT (ver lo siguiente)
 
-[krasa-jaxb-tools](https://github.com/xprl-gjf/krasa-jaxb-tools) es un plugin por `xjc` para
-agregar las anotaciones `jakarta.validation`. Se puede instalarlo con Maven, por:
-
-```console
-$ git clone https://github.com/xprl-gjf/krasa-jaxb-tools.git \
-    && cd krasa-jaxb-tools
-$ mvn clean install
-```
+[krasa-jaxb-tools](https://github.com/fillumina/krasa-jaxb-tools/tree/709066a0fe1438249a014ce6d7da4c5a75bda0b9) es un plugin por `xjc` para
+agregar las anotaciones `jakarta.validation`.
 
 Steps:
 1) Clone el repositorio y compílelo usando el script contenedor `gradlew`:
@@ -46,6 +40,7 @@ $ ./gradlew clean build
 ```console
 $ ./gradlew publishToMavenLocal
 ```
+Este paso no es necesario si solo quiere usar la versión ya publicada en GitHub Packages. 
 
 ## Para usar la libraría sri-efactura-core :jigsaw:
 
@@ -55,6 +50,16 @@ Inclúyalo en su proyecto por Gradle en la manera siguiente:
 // build.gradle.kts:
 
 repositories {
+    // Elija una de los siguientes opciones:
+    // Opción 1: GitHub Packages
+    maven {
+        url = uri("https://maven.pkg.github.com/xprl-gjf/sri-efactura-core")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+            password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+        }
+    }
+    // Opción 2: Maven local cache
     mavenLocal {
         // if using mavenLocal, it is good practice to restrict it to only specific libs/groups
         content {
