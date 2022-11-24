@@ -55,8 +55,8 @@ repositories {
     maven {
         url = uri("https://maven.pkg.github.com/xprl-gjf/sri-efactura-core")
         credentials {
-            username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-            password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            username = (project.findProperty("gpr.user") ?: System.getenv("USERNAME")).toString()
+            password = (project.findProperty("gpr.key") ?: System.getenv("TOKEN")).toString()
         }
     }
     // Opción 2: Maven local cache
