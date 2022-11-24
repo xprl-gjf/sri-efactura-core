@@ -40,7 +40,7 @@ $ ./gradlew clean build
 ```console
 $ ./gradlew publishToMavenLocal
 ```
-Este paso no es necesario si solo quiere usar la versión ya publicada en GitHub Packages. 
+Este paso no es necesario si quiere usar la versión ya publicada en GitHub Packages. 
 
 ## Para usar la libraría sri-efactura-core :jigsaw:
 
@@ -51,7 +51,7 @@ Inclúyalo en su proyecto por Gradle en la manera siguiente:
 
 repositories {
     // Elija una de los siguientes opciones:
-    // Opción 1: GitHub Packages
+    // Opción 1: [GitHub Packages gradle registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry)
     maven {
         url = uri("https://maven.pkg.github.com/xprl-gjf/sri-efactura-core")
         credentials {
