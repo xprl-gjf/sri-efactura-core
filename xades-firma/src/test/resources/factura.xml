@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<factura xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" id="comprobante" version="1.1.0">
+    <infoTributaria>
+        <ambiente>1</ambiente>
+        <tipoEmision>1</tipoEmision>
+        <razonSocial>CORPORACION HVQ S A</razonSocial>
+        <nombreComercial>HOSPITAL VOZANDES QUITO HVQ S.A.</nombreComercial>
+        <ruc>1792758270001</ruc>
+        <claveAcceso>1109202201179275827000110010330000090998597385911</claveAcceso>
+        <codDoc>01</codDoc>
+        <estab>001</estab>
+        <ptoEmi>033</ptoEmi>
+        <secuencial>000009099</secuencial>
+        <dirMatriz>AV. VILLALENGUA Oe2-37 Y 10 DE AGOSTO</dirMatriz>
+    </infoTributaria>
+    <infoFactura>
+        <fechaEmision>11/09/2022</fechaEmision>
+        <dirEstablecimiento>AV. VILLALENGUA Oe2-37 Y 10 DE AGOSTO</dirEstablecimiento>
+        <contribuyenteEspecial>347</contribuyenteEspecial>
+        <obligadoContabilidad>SI</obligadoContabilidad>
+        <tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+        <razonSocialComprador>CHARCO SHIGUANGO JUNIOR WILLIGRAN</razonSocialComprador>
+        <identificacionComprador>2100795141</identificacionComprador>
+        <direccionComprador>PINTAG S&amp;sol;N </direccionComprador>
+        <totalSinImpuestos>24.00</totalSinImpuestos>
+        <totalDescuento>0.00</totalDescuento>
+        <totalConImpuestos>
+            <totalImpuesto>
+                <codigo>2</codigo>
+                <codigoPorcentaje>0</codigoPorcentaje>
+                <descuentoAdicional>0.00</descuentoAdicional>
+                <baseImponible>24.00</baseImponible>
+                <valor>0.00</valor>
+            </totalImpuesto>
+        </totalConImpuestos>
+        <propina>0</propina>
+        <importeTotal>24.00</importeTotal>
+        <moneda>DOLAR</moneda>
+        <pagos>
+            <pago>
+                <formaPago>19</formaPago>
+                <total>24.00</total>
+            </pago>
+        </pagos>
+    </infoFactura>
+    <detalles>
+        <detalle>
+            <codigoPrincipal>P00000745</codigoPrincipal>
+            <descripcion>CONSULTA OFTALMOLOGICA</descripcion>
+            <cantidad>1</cantidad>
+            <precioUnitario>24.00</precioUnitario>
+            <descuento>0.00</descuento>
+            <precioTotalSinImpuesto>24.00</precioTotalSinImpuesto>
+            <impuestos>
+                <impuesto>
+                    <codigo>2</codigo>
+                    <codigoPorcentaje>0</codigoPorcentaje>
+                    <tarifa>0</tarifa>
+                    <baseImponible>24.00</baseImponible>
+                    <valor>0.00</valor>
+                </impuesto>
+            </impuestos>
+        </detalle>
+    </detalles>
+    <infoAdicional>
+        <campoAdicional nombre="hvq-factura-meta-1.0">0026705010115#APP_TLM#0#</campoAdicional>
+        <campoAdicional nombre="hvq-cita">0112628201-001#CHARCO BURBANO DILLAN WILLIGRAN#PAZMIÑO GAVILANES MARGARITA DEL ROCIO#OFTALMOLOGIA#13-09-2022#10:36</campoAdicional>
+    </infoAdicional>
+</factura>

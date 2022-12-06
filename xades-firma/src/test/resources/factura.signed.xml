@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" id="comprobante" version="1.1.0">
+    <infoTributaria>
+        <ambiente>1</ambiente>
+        <tipoEmision>1</tipoEmision>
+        <razonSocial>CORPORACION HVQ S A</razonSocial>
+        <nombreComercial>HOSPITAL VOZANDES QUITO HVQ S.A.</nombreComercial>
+        <ruc>1792758270001</ruc>
+        <claveAcceso>1109202201179275827000110010330000090998597385911</claveAcceso>
+        <codDoc>01</codDoc>
+        <estab>001</estab>
+        <ptoEmi>033</ptoEmi>
+        <secuencial>000009099</secuencial>
+        <dirMatriz>AV. VILLALENGUA Oe2-37 Y 10 DE AGOSTO</dirMatriz>
+    </infoTributaria>
+    <infoFactura>
+        <fechaEmision>11/09/2022</fechaEmision>
+        <dirEstablecimiento>AV. VILLALENGUA Oe2-37 Y 10 DE AGOSTO</dirEstablecimiento>
+        <contribuyenteEspecial>347</contribuyenteEspecial>
+        <obligadoContabilidad>SI</obligadoContabilidad>
+        <tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+        <razonSocialComprador>CHARCO SHIGUANGO JUNIOR WILLIGRAN</razonSocialComprador>
+        <identificacionComprador>2100795141</identificacionComprador>
+        <direccionComprador>PINTAG S&amp;sol;N </direccionComprador>
+        <totalSinImpuestos>24.00</totalSinImpuestos>
+        <totalDescuento>0.00</totalDescuento>
+        <totalConImpuestos>
+            <totalImpuesto>
+                <codigo>2</codigo>
+                <codigoPorcentaje>0</codigoPorcentaje>
+                <descuentoAdicional>0.00</descuentoAdicional>
+                <baseImponible>24.00</baseImponible>
+                <valor>0.00</valor>
+            </totalImpuesto>
+        </totalConImpuestos>
+        <propina>0</propina>
+        <importeTotal>24.00</importeTotal>
+        <moneda>DOLAR</moneda>
+        <pagos>
+            <pago>
+                <formaPago>19</formaPago>
+                <total>24.00</total>
+            </pago>
+        </pagos>
+    </infoFactura>
+    <detalles>
+        <detalle>
+            <codigoPrincipal>P00000745</codigoPrincipal>
+            <descripcion>CONSULTA OFTALMOLOGICA</descripcion>
+            <cantidad>1</cantidad>
+            <precioUnitario>24.00</precioUnitario>
+            <descuento>0.00</descuento>
+            <precioTotalSinImpuesto>24.00</precioTotalSinImpuesto>
+            <impuestos>
+                <impuesto>
+                    <codigo>2</codigo>
+                    <codigoPorcentaje>0</codigoPorcentaje>
+                    <tarifa>0</tarifa>
+                    <baseImponible>24.00</baseImponible>
+                    <valor>0.00</valor>
+                </impuesto>
+            </impuestos>
+        </detalle>
+    </detalles>
+    <infoAdicional>
+        <campoAdicional nombre="hvq-factura-meta-1.0">0026705010115#APP_TLM#0#</campoAdicional>
+        <campoAdicional nombre="hvq-cita">0112628201-001#CHARCO BURBANO DILLAN WILLIGRAN#PAZMIÑO GAVILANES MARGARITA DEL ROCIO#OFTALMOLOGIA#13-09-2022#10:36</campoAdicional>
+    </infoAdicional>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature701886">
+<ds:SignedInfo Id="Signature-SignedInfo603001">
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+<ds:Reference Id="SignedPropertiesID885370" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature701886-SignedProperties690864">
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>QsHbkST2ok9bGN7ShtuZqoR7m3Y=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference URI="#Certificate1987904">
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>jcaM/RCnb5WK/dKdZ4WrbOsMQ+I=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference Id="Reference-ID-682145" URI="#comprobante">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>JiHVUADrtz7VZXS2aefpv1LWaaI=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue Id="SignatureValue17472">
+cL+rx7jvJPZoH+BjW5IFpYeFPIwBerD2eLaDdFE3do1y1pL+lARtPVx6kxdhxPpwHBVUIIVqXqqx
+GhHvForAgGGixHIiC5AJlXG0ogydouEaFgKSkCvTTFK3FiCimWkqiBPb0iTFOP4ONnutM0Ya2FuI
+IXvNFWIVMKKmdH5c8adYY5EwtOQDa+0KIUBtypxmUc6u40pZRY1UgQzZpigejD7JgovLvFQtj7/3
+OKBItG4pxbG5e539HpXp+loTV88ED9a7Y5mzslmO23ReDaOnUztkjXU97XcGBimmvvemEKg/1ZhL
+3XvBTNz4mNaK53zjmwke1nzoiKELo7oyPr1lp2w76rJ80I9IR0TlakqCFcQe5H+Sjo3A5Hzo5pDb
+Sv3en9ViSxYpj7vrl71YF3halO0y6HVOsewU9fuK4Db2HNXtiTDLefKwghaSs2uHzpAwx4e8le0R
+SPbNRr7hEayNx/w6/qJzmht+X5QAsXYp+ozdCEHzYUOaazXyqGZXAKNXpw04j0X6x2CVDDDXn3wX
+iaVr6g7FQFIrGX1+mFK/79nP8TfSGE/zMqDZBwHYzWDK/MHBExX8GDsVRvne61ICCfA95Zd45OC8
+u76WqQNEiaHRYHrdYg1VbcAI/AfsiYOHHfCO/UFC0fw3wAnJ2bCfOYeCUjiaOgUQqcjt+HEB79M=
+</ds:SignatureValue>
+<ds:KeyInfo Id="Certificate1987904">
+<ds:X509Data>
+<ds:X509Certificate>
+MIIFPjCCAyagAwIBAgIUIge17t8J3W9tJAwahJeUWtC0mnUwDQYJKoZIhvcNAQELBQAwFjEUMBIG
+A1UEAwwLZXhhbXBsZS5jb20wHhcNMjIxMjA2MTc0ODQ2WhcNMzIxMjAzMTc0ODQ2WjAWMRQwEgYD
+VQQDDAtleGFtcGxlLmNvbTCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAOPmBPLn0z/l
++zLqbrpcYVFKROq7EYhHRLFKH17d3WOoBOWFl3nTaLVAL4xCvjAzHckI0wCmF/uzG0q3D8WNZBY3
+OShdjjl3d45z08fiIinnP2FUiEVI5TYM2hSlPIu0NuLR+qx/3+DDTYR3tEkLagf11LIGYH1pdfqj
+X0wSVLSke59I8NqXXyXW2DjMKjCzy+kAT4qmAYGFL2J26Vuw1V6yilLAsIYbZOsTSCHazN+qfMUL
+4NE0lU82F79P8wwleErhlFCRk8UC662awpQ2jg+WKRElYFa62GGuWKZtAeLEwqHwm7CAW01AnGEK
+ZB5nbP2eS3h1qH1BYkT3FCpk5EADnsPpYTNPYXoN249rB0vBYOyyPkwW+PWAGT5bcwr4z8JrLyhG
+OrvNoIAeNn2MO6v4WRzpK7tsQyohqrW2XdQkOJcksyrvY5mlPxdVltxG4dRTlQioHleKoUJXCLfh
+Ocf4UccVddjb7/zTDWfRbB5brQcrvvFMJtDh15dsrL8bsEuaK03BkDt+gddYn5LwGgKe5ctQTAWt
+USlhHL/l+dfg3KvLK1MFdY9/Q3XE39RWU41jzUhQ7eGHcHbgra7bH2ZXdAhsjCFtDh9ubgNs5Q+L
+J4/syQ/wYKkalpxysynQYGQIO057NNqzaJPZaC45h+8kd7HQTJPLSlF1SvyqAzlJAgMBAAGjgYMw
+gYAwHQYDVR0OBBYEFGbwH9oDgaEfwnUM5Y7ujVKdBWshMB8GA1UdIwQYMBaAFGbwH9oDgaEfwnUM
+5Y7ujVKdBWshMA8GA1UdEwEB/wQFMAMBAf8wLQYDVR0RBCYwJIILZXhhbXBsZS5jb22CD3d3dy5l
+eGFtcGxlLm5ldIcECgAAATANBgkqhkiG9w0BAQsFAAOCAgEAU8y1BBbIBwVqj5lu15sW3LaRZReF
+n72UBkOhlwCePfHmUX5eoOR02H7H474dcEAgWgxFUT6ipVOtSOcDVU4beADQAz8F3UvSVEwrt9WE
+zNjrFDOrGvrkBLiqHsACCKhuSCDvV+rfFfoeZ3/+onIzZC9mYkh/s6f7U4P5zspWt5oPQca40m+D
+/X+5S2qImOr4BaBNHILPvY90a5rHKWdUaGQaTHNhfcIhvThEoa8m6IhkHJPBcMFXUAQZNUJlahkQ
+a1H91P+2GipVf7l9bjVsBvYHDvLphA5P9tU4Slw2tripXjNgxSgHloFZZOmuvkIuWKeVGxfe4o4Q
+uKLQydBjV2Tjve9xTz1QOVpcEg05RCqkx7RWQSHz4OwxyTPbPqPbMDQlzOFyAYuYPNqyMD8d0FpR
+9LiXyHslFon85rxFc+WXH/ASvECvgG5UQPNInyk9M1DANpMdguhJlrE+TZFwYHItRhiaOs1wP89i
+xjC/mORFrlt2gYrDpySuKOjTK5U2p8AfKLE+ZYrZEq3+/quoW8aKvvIcM1SC3YhhlrPc4CjjywU8
+XLuZL7FB2wrHMrYDXmSSW1M+t+5/MLMsYufrWrLu8Bn1es1bmUW2LJXc/mklXRF4J6bXArUiMaF7
+HuDb+Go5FeFi1TE4Wr2mRc2yJpWOlnCDSrYEPrvf4B8gG0c=
+</ds:X509Certificate>
+</ds:X509Data>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+4+YE8ufTP+X7MupuulxhUUpE6rsRiEdEsUofXt3dY6gE5YWXedNotUAvjEK+MDMdyQjTAKYX+7Mb
+SrcPxY1kFjc5KF2OOXd3jnPTx+IiKec/YVSIRUjlNgzaFKU8i7Q24tH6rH/f4MNNhHe0SQtqB/XU
+sgZgfWl1+qNfTBJUtKR7n0jw2pdfJdbYOMwqMLPL6QBPiqYBgYUvYnbpW7DVXrKKUsCwhhtk6xNI
+IdrM36p8xQvg0TSVTzYXv0/zDCV4SuGUUJGTxQLrrZrClDaOD5YpESVgVrrYYa5Ypm0B4sTCofCb
+sIBbTUCcYQpkHmds/Z5LeHWofUFiRPcUKmTkQAOew+lhM09heg3bj2sHS8Fg7LI+TBb49YAZPltz
+CvjPwmsvKEY6u82ggB42fYw7q/hZHOkru2xDKiGqtbZd1CQ4lySzKu9jmaU/F1WW3Ebh1FOVCKge
+V4qhQlcIt+E5x/hRxxV12Nvv/NMNZ9FsHlutByu+8Uwm0OHXl2ysvxuwS5orTcGQO36B11ifkvAa
+Ap7ly1BMBa1RKWEcv+X51+Dcq8srUwV1j39DdcTf1FZTjWPNSFDt4YdwduCtrtsfZld0CGyMIW0O
+H25uA2zlD4snj+zJD/BgqRqWnHKzKdBgZAg7Tns02rNok9loLjmH7yR3sdBMk8tKUXVK/KoDOUk=
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+</ds:KeyInfo>
+<ds:Object Id="Signature701886-Object640659"><etsi:QualifyingProperties Target="#Signature701886"><etsi:SignedProperties Id="Signature701886-SignedProperties690864"><etsi:SignedSignatureProperties><etsi:SigningTime>2022-12-06T13:35:35-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>F7DJPA+FAyZQk9YDVcCgKBNKtZE=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=example.com</ds:X509IssuerName><ds:X509SerialNumber>194277640031826298946303928848317466132408998517</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-682145"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></factura>
