@@ -2,7 +2,7 @@
 val jaxws: Configuration by configurations.creating
 
 plugins {
-    id("sri-efactura-utils.java-library-conventions")
+    id("sri-efactura-core.java-library-conventions")
     idea
 }
 

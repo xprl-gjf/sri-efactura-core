@@ -1,7 +1,6 @@
 
 plugins {
-    id("sri-efactura-utils.java-library-conventions")
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("sri-efactura-core.java-library-conventions")
 }
 
 dependencies {
@@ -13,17 +12,4 @@ dependencies {
     testImplementation("org.xmlunit:xmlunit-assertj:2.9.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.5")
-}
-
-tasks.jar {
-    enabled = false
-}
-
-tasks.shadowJar {
-    archiveBaseName.set("xades-firma")
-    archiveClassifier.set("")
-}
-
-artifacts {
-    archives(tasks.shadowJar)
 }
