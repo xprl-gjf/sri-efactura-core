@@ -54,7 +54,7 @@ public class TestXAdESBESSignature {
                 firmaClave,
                 "contenido comprobante");
 
-        saveDocumentToFile(result, "result.xml");
+        // saveDocumentToFile(result, "result.xml");
         XmlAssert.assertThat(result).and(Input.fromFile(expectedResultFile))
                 .ignoreWhitespace()
                 .withNodeFilter(TestXAdESBESSignature::FacturaXmlNodeComparisonFilter)
