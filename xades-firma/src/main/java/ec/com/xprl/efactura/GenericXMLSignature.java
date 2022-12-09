@@ -22,6 +22,15 @@ import static org.apache.xml.security.algorithms.MessageDigestAlgorithm.ALGO_ID_
 import static org.apache.xml.security.signature.XMLSignature.ALGO_ID_SIGNATURE_RSA_SHA1;
 
 public abstract class GenericXMLSignature {
+
+    /*
+     * Bug fix for https://bugs.openjdk.java.net/browse/JDK-8264194
+     */
+    static {
+        // System.setProperty("com.sun.org.apache.xml.internal.security.ignoreLineBreaks", "true");
+        System.setProperty("org.apache.xml.security.ignoreLineBreaks", "true");
+    }
+
     /**
      * Firmar los datos creados por el método abstracto <code>createDataToSign</code>
      * mediante el primer certificado encontré en el <code>firmaClienteKeyStore</code>.
