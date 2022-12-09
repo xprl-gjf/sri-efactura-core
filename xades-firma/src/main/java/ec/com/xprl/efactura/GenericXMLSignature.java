@@ -107,7 +107,7 @@ public abstract class GenericXMLSignature {
                 .withBasicSignatureOptions(new BasicSignatureOptions()
                     .signKeyInfo(true)
                     .includePublicKey(true)
-                    .includeSigningCertificate(SigningCertificateMode.FULL_CHAIN)
+                    .includeSigningCertificate(SigningCertificateMode.SIGNING_CERTIFICATE)
                 );
 
         /*
