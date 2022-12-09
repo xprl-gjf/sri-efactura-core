@@ -3,6 +3,5 @@ include(":sri-client")
 include(":sri-soap-cli")
 include(":sri-efactura-model")
 include(":xades-firma")
-include(":shadow-jar")
 
 

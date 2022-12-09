@@ -21,7 +21,7 @@
         <tipoIdentificacionComprador>05</tipoIdentificacionComprador>
         <razonSocialComprador>CHARCO SHIGUANGO JUNIOR WILLIGRAN</razonSocialComprador>
         <identificacionComprador>2100795141</identificacionComprador>
-        <direccionComprador>PINTAG S&amp;sol;N </direccionComprador>
+        <direccionComprador>PINTAG S&amp;amp;N </direccionComprador>
         <totalSinImpuestos>24.00</totalSinImpuestos>
         <totalDescuento>0.00</totalDescuento>
         <totalConImpuestos>

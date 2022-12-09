@@ -10,8 +10,12 @@ import org.w3c.dom.Node;
 import org.xmlunit.assertj.XmlAssert;
 import org.xmlunit.builder.Input;
 
-import java.io.File;
-import java.io.IOException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -42,16 +46,15 @@ public class TestXAdESBESSignature {
         File firma = getResourceFile(firmaFilename);
 
         byte[] xmlContent = readFile(xmlFile.getPath());
-        byte[] firmaContent = readFile(firma.getPath());
         XAdESBESSignature firmador = new XAdESBESSignature();
 
         Document result = firmador.firmarDocumento(
                 xmlContent,
-                firmaContent,
+                firma,
                 firmaClave,
                 "contenido comprobante");
 
-        // firmador.saveDocumentToFile(result, "result.xml");
+        // saveDocumentToFile(result, "result.xml");
         XmlAssert.assertThat(result).and(Input.fromFile(expectedResultFile))
                 .ignoreWhitespace()
                 .withNodeFilter(TestXAdESBESSignature::FacturaXmlNodeComparisonFilter)
@@ -74,12 +77,11 @@ public class TestXAdESBESSignature {
         File firma = getResourceFile(firmaFilename);
 
         byte[] xmlContent = readFile(xmlFile.getPath());
-        byte[] firmaContent = readFile(firma.getPath());
         XAdESBESSignature firmador = new XAdESBESSignature();
 
         Document result = firmador.firmarDocumento(
                 xmlContent,
-                firmaContent,
+                firma,
                 firmaClave,
                 "contenido comprobante");
 
@@ -141,5 +143,22 @@ public class TestXAdESBESSignature {
         throws IOException
     {
         return Files.readAllBytes(Paths.get(path));
+    }
+
+    /**
+     * <p>
+     * Escribe el documento a un fichero.
+     * </p>
+     *
+     * @param document El documento a imprmir
+     * @param filePath El path del fichero donde se quiere escribir.
+     */
+    private static void saveDocumentToFile(Document document, String filePath) throws TransformerException, IOException {
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        DOMSource source = new DOMSource(document);
+        FileWriter writer = new FileWriter(filePath);
+        StreamResult result = new StreamResult(writer);
+        transformer.transform(source, result);
     }
 }
