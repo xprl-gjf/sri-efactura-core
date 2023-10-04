@@ -23,10 +23,6 @@ línea de comandos por pruebas/depuración: ver [sri-soap-cli](sri-soap-cli)
 
 Prerequisites:
 - JDK >= Java SE 8
-- `ec.com.xprl:krasa-jaxb-tools` v2.3-SNAPSHOT (ver lo siguiente)
-
-[krasa-jaxb-tools](https://github.com/fillumina/krasa-jaxb-tools/tree/709066a0fe1438249a014ce6d7da4c5a75bda0b9) es un plugin por `xjc` para
-agregar las anotaciones `jakarta.validation`.
 
 Steps:
 1) Clone el repositorio y compílelo usando el script contenedor `gradlew`:
