@@ -8,11 +8,6 @@ plugins {
 }
 
 repositories {
-    maven {
-        // TODO: remove this if/when upstream krasa-jaxb-tools publishes version 2.3 to mavenCentral.
-        // See (https://github.com/fillumina/krasa-jaxb-tools/pull/2)
-        url=uri("https://jitpack.io")
-    }
     mavenCentral()
 }
 
@@ -21,7 +16,7 @@ dependencies {
     api("jakarta.validation:jakarta.validation-api:3.0.2")
     jaxXjc("com.sun.xml.bind:jaxb-xjc:4.0.0")
     jaxXjc("com.sun.xml.bind:jaxb-impl:4.0.0")
-    jaxXjc("com.github.fillumina:krasa-jaxb-tools:709066a0fe1438249a014ce6d7da4c5a75bda0b9") {
+    jaxXjc("com.ethlo:krasa-jaxb-tools:2.2.1") {
         because("xjc plugin to apply jakarta.validation annotations.")
     }
     testCompileOnly("org.jetbrains:annotations:23.0.0")
