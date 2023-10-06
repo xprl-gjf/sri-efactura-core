@@ -1,4 +1,4 @@
-package ec.com.xprl.gradle
+package uk.co.xprl.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -10,7 +10,7 @@ import org.gradle.kotlin.dsl.get
 /**
  * Gradle plugin to simplify publishing a maven artifact to configured repositories
  * (using the Gradle built-in 'maven-publish' plugin),
- * by supplying project information via the ec.com.xprl.gradle.ProjectInfoPlugin.
+ * by supplying project information via the uk.co.xprl.gradle.ProjectInfoPlugin.
  */
 class MavenArtifactPlugin : Plugin<Project> {
     override fun apply(project: Project) {

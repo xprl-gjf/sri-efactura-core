@@ -9,8 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import static ec.gob.sri.JaxbTestFixture.config;
-
 public class GuiaRemisionTest {
 
     private static final String xmlFilename = "GuiaRemision_V1.0.0.xml";
@@ -42,11 +40,11 @@ public class GuiaRemisionTest {
 
     private static Stream<Arguments> getInvalidRemisionConfigActions() {
         return Stream.of(
-            config("invalid id", GuiaRemisionTest::invalidId, "must match \"\\Qcomprobante\\E\""),
-            config("missing infoTributaria", GuiaRemisionTest::missingInfoTributaria, "GuiaRemision.infoTributaria must not be null"),
-            config("empty remision destinatarios", GuiaRemisionTest::emptyRemisionDestinatarios, "size must be between 1 and 2147483647"),
-            config("empty razonSocialTransportista", GuiaRemisionTest::infoGuiaRemisionInvalidRazonSocialTransportista, "size must be between 1 and 300"),
-            config("invalid detalle descripcion", GuiaRemisionTest::invalidDetalleDescripcion, "size must be between 1 and 25")
+            JaxbTestFixture.config("invalid id", GuiaRemisionTest::invalidId, "must match \"\\Qcomprobante\\E\""),
+            JaxbTestFixture.config("missing infoTributaria", GuiaRemisionTest::missingInfoTributaria, "GuiaRemision.infoTributaria must not be null"),
+            JaxbTestFixture.config("empty remision destinatarios", GuiaRemisionTest::emptyRemisionDestinatarios, "size must be between 1 and 2147483647"),
+            JaxbTestFixture.config("empty razonSocialTransportista", GuiaRemisionTest::infoGuiaRemisionInvalidRazonSocialTransportista, "size must be between 1 and 300"),
+            JaxbTestFixture.config("invalid detalle descripcion", GuiaRemisionTest::invalidDetalleDescripcion, "size must be between 1 and 25")
         );
     }
 

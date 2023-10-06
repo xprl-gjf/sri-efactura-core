@@ -1,4 +1,4 @@
-package ec.com.xprl.gradle
+package uk.co.xprl.gradle
 
 import com.typesafe.config.*
 import kotlinx.serialization.ExperimentalSerializationApi

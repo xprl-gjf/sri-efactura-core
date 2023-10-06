@@ -1,4 +1,4 @@
-package ec.com.xprl.efactura;
+package uk.co.xprl.efactura;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jetbrains.annotations.NotNull;

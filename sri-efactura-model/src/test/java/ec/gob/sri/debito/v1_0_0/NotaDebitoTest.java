@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import static ec.gob.sri.JaxbTestFixture.config;
-
 public class NotaDebitoTest {
 
     private static final String xmlFilename = "NotaDebito_V1.0.0.xml";
@@ -43,12 +41,12 @@ public class NotaDebitoTest {
 
     private static Stream<Arguments> getInvalidNotaDebitoConfigActions() {
         return Stream.of(
-                config("invalid id", NotaDebitoTest::invalidId, "must match \"\\Qcomprobante\\E\""),
-                config("invalid version", NotaDebitoTest::invalidVersion, "NotaDebito.version must not be null"),
-                config("missing infoTributaria", NotaDebitoTest::missingInfoTributaria, "NotaDebito.infoTributaria must not be null"),
-                config("empty notaDebitoDetalles", NotaDebitoTest::emptyNotaDebitoMotivos, "size must be between 1 and 2147483647"),
-                config("invalid notaDebitoDetalles", NotaDebitoTest::invalidNotaDebitoMotivos, "must match \"[^\\n]*\""),
-                config("invalid valor", NotaDebitoTest::invalidValor, "numeric value out of bounds (<14 digits>.<2 digits> expected)")
+                JaxbTestFixture.config("invalid id", NotaDebitoTest::invalidId, "must match \"\\Qcomprobante\\E\""),
+                JaxbTestFixture.config("invalid version", NotaDebitoTest::invalidVersion, "NotaDebito.version must not be null"),
+                JaxbTestFixture.config("missing infoTributaria", NotaDebitoTest::missingInfoTributaria, "NotaDebito.infoTributaria must not be null"),
+                JaxbTestFixture.config("empty notaDebitoDetalles", NotaDebitoTest::emptyNotaDebitoMotivos, "size must be between 1 and 2147483647"),
+                JaxbTestFixture.config("invalid notaDebitoDetalles", NotaDebitoTest::invalidNotaDebitoMotivos, "must match \"[^\\n]*\""),
+                JaxbTestFixture.config("invalid valor", NotaDebitoTest::invalidValor, "numeric value out of bounds (<14 digits>.<2 digits> expected)")
         );
     }
 

@@ -1,5 +1,5 @@
 import com.fasterxml.jackson.databind.ObjectMapper
-import ec.com.xprl.efactura.soap.client.AutorizacionComprobanteProxy
+import uk.co.xprl.efactura.soap.client.AutorizacionComprobanteProxy
 import java.net.URL
 
 fun cmdAutorizarComprobante(

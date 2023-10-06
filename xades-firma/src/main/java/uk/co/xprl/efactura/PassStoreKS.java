@@ -1,4 +1,4 @@
-package ec.com.xprl.efactura;
+package uk.co.xprl.efactura;
 
 import es.mityc.javasign.pkstore.IPassStoreKS;
 

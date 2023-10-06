@@ -3,7 +3,7 @@ import com.github.jengelman.gradle.plugins.shadow.transformers.*
 plugins {
     id("sri-efactura-utils.java-library-conventions")
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("ec.com.xprl.maven-artifact")
+    id("uk.co.xprl.maven-artifact")
 }
 
 repositories {

@@ -1,4 +1,4 @@
-package ec.com.xprl.efactura.soap.client;
+package uk.co.xprl.efactura.soap.client;
 
 import ec.gob.sri.ws.recepcion.RecepcionComprobantesOffline;
 import ec.gob.sri.ws.recepcion.RecepcionComprobantesOfflineService;

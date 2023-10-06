@@ -1,4 +1,4 @@
-package ec.com.xprl.efactura;
+package uk.co.xprl.efactura;
 
 import es.mityc.firmaJava.libreria.utilidades.UtilidadTratarNodo;
 import es.mityc.firmaJava.libreria.xades.DataToSign;
