@@ -46,6 +46,7 @@ class MavenArtifactPlugin : Plugin<Project> {
         val developers = (projectInfo?.developers as Array<*>?)
             ?.filterIsInstance<DeveloperInfo>()
             ?: emptyList()
+        val scmInfo = projectInfo?.scm
 
         publishingExtension.publications.create<MavenPublication>(publicationName) {
             artifactId = artifactExtension.artifactId
@@ -82,13 +83,13 @@ class MavenArtifactPlugin : Plugin<Project> {
                         }
                     }
                 }
-                /*
-            scm {
-                connection.set("scm:git:git://example.com/my-library.git")
-                developerConnection.set("scm:git:ssh://example.com/my-library.git")
-                url.set("http://example.com/my-library/")
-            }
-             */
+                scmInfo?.let {
+                    scm {
+                        connection.set(it.connection)
+                        developerConnection.set(it.developerConnection)
+                        url.set(it.url)
+                    }
+                }
             }
         }
     }
