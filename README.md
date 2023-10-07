@@ -36,7 +36,7 @@ $ ./gradlew clean build
 ```console
 $ ./gradlew publishToMavenLocal
 ```
-Este paso no es necesario si quiere usar la versión ya publicada en GitHub Packages. 
+Este paso no es necesario si quiere usar la versión ya publicada en MavenCentral. 
 
 ## Para usar la libraría sri-efactura-core :jigsaw:
 
@@ -47,14 +47,9 @@ Inclúyalo en su proyecto por Gradle en la manera siguiente:
 
 repositories {
     // Elija una de los siguientes opciones:
-    // Opción 1: [GitHub Packages gradle registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry)
-    maven {
-        url = uri("https://maven.pkg.github.com/xprl-gjf/sri-efactura-core")
-        credentials {
-            username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-            password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
-        }
-    }
+    // Opción 1: [MavenCentral](https://repo1.maven.org/maven2/uk/co/xprl/efactura/sri-efactura-core/)
+    mavenCentral()
+
     // Opción 2: Maven local cache
     mavenLocal {
         // if using mavenLocal, it is good practice to restrict it to only specific libs/groups
@@ -65,7 +60,7 @@ repositories {
 }
 
 dependencies {
-    implementation("uk.co.xprl.efactura:sri-efactura-core:0.1.0")
+    implementation("uk.co.xprl.efactura:sri-efactura-core:0.1.2")
     runtimeOnly("com.sun.xml.bind:jaxb-impl:4.0.0",) {
         because("Runtime implementation of jaxb-api")
     }
