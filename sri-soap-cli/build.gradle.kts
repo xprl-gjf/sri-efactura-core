@@ -1,6 +1,6 @@
 
 plugins {
-    id("sri-efactura-utils.kotlin-application-conventions")
+    id("sri-efactura-core.kotlin-application-conventions")
 }
 
 dependencies {

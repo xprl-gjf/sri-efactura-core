@@ -1,7 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.transformers.*
 
 plugins {
-    id("sri-efactura-utils.java-library-conventions")
+    id("sri-efactura-core.java-library-conventions")
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("uk.co.xprl.maven-artifact")
 }
