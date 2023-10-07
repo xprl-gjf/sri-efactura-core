@@ -4,7 +4,10 @@ plugins {
     id("sri-efactura-core.java-library-conventions")
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("uk.co.xprl.maven-artifact")
+    signing
 }
+
+extra["isReleaseVersion"] = !version.toString().endsWith("SNAPSHOT")
 
 repositories {
     mavenCentral()
@@ -65,6 +68,7 @@ javaComponent.withVariantsFromConfiguration(configurations["runtimeElements"]) {
     skip()
 }
 
+
 /*
  * Publish the generated shadow Jar to a Maven repository.
  */
@@ -79,12 +83,32 @@ publishing {
         }
          */
         maven {
+            name = "OSSRH"      /* MavenCentral */
+            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = project.findProperty("ossrh.Username") as String? ?: System.getenv("MAVEN_USERNAME")
+                password = project.findProperty("ossrh.Password") as String? ?: System.getenv("MAVEN_PASSWORD")
+            }
+        }
+        maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/xprl-gjf/sri-efactura-core")
             credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
             }
         }
     }
+}
+
+signing {
+    /*
+    setRequired({
+        (project.extra["isReleaseVersion"] as Boolean) && gradle.taskGraph.hasTask("publish")
+    })
+     */
+    //val signingKey: String? by project
+    //val signingPassword: String? by project
+    //useInMemoryPgpKeys(signingKey, signingPassword)
+    sign(publishing.publications)
 }
