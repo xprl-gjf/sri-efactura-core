@@ -19,12 +19,12 @@ repositories {
 gradlePlugin {
     plugins {
         create("projectInfoPlugin") {
-            id = "ec.com.xprl.project-info"
-            implementationClass = "ec.com.xprl.gradle.ProjectInfoPlugin"
+            id = "uk.co.xprl.project-info"
+            implementationClass = "uk.co.xprl.gradle.ProjectInfoPlugin"
         }
         create("mavenArtifactPlugin") {
-            id = "ec.com.xprl.maven-artifact"
-            implementationClass = "ec.com.xprl.gradle.MavenArtifactPlugin"
+            id = "uk.co.xprl.maven-artifact"
+            implementationClass = "uk.co.xprl.gradle.MavenArtifactPlugin"
         }
     }
 }

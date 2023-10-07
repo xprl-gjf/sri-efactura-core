@@ -1,4 +1,4 @@
-package ec.com.xprl.gradle
+package uk.co.xprl.gradle
 
 import org.gradle.api.Project
 import kotlin.reflect.KProperty

@@ -59,13 +59,13 @@ repositories {
     mavenLocal {
         // if using mavenLocal, it is good practice to restrict it to only specific libs/groups
         content {
-            includeGroup("ec.com.xprl.efactura")
+            includeGroup("uk.co.xprl.efactura")
         }
     }
 }
 
 dependencies {
-    implementation("ec.com.xprl.efactura:sri-efactura-core:0.1.0")
+    implementation("uk.co.xprl.efactura:sri-efactura-core:0.1.0")
     runtimeOnly("com.sun.xml.bind:jaxb-impl:4.0.0",) {
         because("Runtime implementation of jaxb-api")
     }
@@ -92,8 +92,8 @@ dependencies {
 
 Las clases esenciales están en packages:
 * ec.gob.sri.\<comprobante\>.vX_X_X.\*  - generadas automáticamente por XSD, incluyendo la versión del esquema XSD, como `ec.gob.sri.factura.V1_1_0.Factura`,
-* [ec.com.xprl.efactura.soap.client.*](sri-client/src/main/java/ec/com/xprl/efactura/soap/client) - proxies por servicios web de SRI
-* [ec.com.xprl.efactura.XAdESBESSignature](xades-firma/src/main/java/ec/com/xprl/efactura/XAdESBESSignature.java) - para firmar documentos XML.
+* [uk.co.xprl.efactura.soap.client.*](sri-client/src/main/java/uk/co/xprl/efactura/soap/client) - proxies por servicios web de SRI
+* [uk.co.xprl.efactura.XAdESBESSignature](xades-firma/src/main/java/uk/co/xprl/efactura/XAdESBESSignature.java) - para firmar documentos XML.
 
 
 Por ejemplos, ver los [unit tests](sri-efactura-model/src/test/java/ec/gob/sri) y [sri-soap-cli](sri-soap-cli/src/main/kotlin)

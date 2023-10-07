@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import static ec.gob.sri.JaxbTestFixture.config;
-
 public class FacturaTest {
 
     private static final String xmlFilename = "factura_V1.1.0.xml";
@@ -43,10 +41,10 @@ public class FacturaTest {
 
     private static Stream<Arguments> getInvalidFacturaConfigActions() {
         return Stream.of(
-            config("invalid version", FacturaTest::invalidRazonSocial, "size must be between 1 and 300"),
-            config("missing infoTributaria", FacturaTest::missingInfoFactura, "Factura.infoFactura must not be null"),
-            config("empty facturaDetalles", FacturaTest::emptyFacturaPagos, "size must be between 1 and 2147483647"),
-            config("invalid totalSinImpuestos", FacturaTest::invalidTotalSinImpuestos, "numeric value out of bounds (<14 digits>.<2 digits> expected)")
+            JaxbTestFixture.config("invalid version", FacturaTest::invalidRazonSocial, "size must be between 1 and 300"),
+            JaxbTestFixture.config("missing infoTributaria", FacturaTest::missingInfoFactura, "Factura.infoFactura must not be null"),
+            JaxbTestFixture.config("empty facturaDetalles", FacturaTest::emptyFacturaPagos, "size must be between 1 and 2147483647"),
+            JaxbTestFixture.config("invalid totalSinImpuestos", FacturaTest::invalidTotalSinImpuestos, "numeric value out of bounds (<14 digits>.<2 digits> expected)")
         );
     }
 

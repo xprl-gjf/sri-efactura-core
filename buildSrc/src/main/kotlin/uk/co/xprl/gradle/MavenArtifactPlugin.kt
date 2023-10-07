@@ -1,4 +1,4 @@
-package ec.com.xprl.gradle
+package uk.co.xprl.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -10,7 +10,7 @@ import org.gradle.kotlin.dsl.get
 /**
  * Gradle plugin to simplify publishing a maven artifact to configured repositories
  * (using the Gradle built-in 'maven-publish' plugin),
- * by supplying project information via the ec.com.xprl.gradle.ProjectInfoPlugin.
+ * by supplying project information via the uk.co.xprl.gradle.ProjectInfoPlugin.
  */
 class MavenArtifactPlugin : Plugin<Project> {
     override fun apply(project: Project) {
@@ -46,6 +46,7 @@ class MavenArtifactPlugin : Plugin<Project> {
         val developers = (projectInfo?.developers as Array<*>?)
             ?.filterIsInstance<DeveloperInfo>()
             ?: emptyList()
+        val scmInfo = projectInfo?.scm
 
         publishingExtension.publications.create<MavenPublication>(publicationName) {
             artifactId = artifactExtension.artifactId
@@ -82,13 +83,13 @@ class MavenArtifactPlugin : Plugin<Project> {
                         }
                     }
                 }
-                /*
-            scm {
-                connection.set("scm:git:git://example.com/my-library.git")
-                developerConnection.set("scm:git:ssh://example.com/my-library.git")
-                url.set("http://example.com/my-library/")
-            }
-             */
+                scmInfo?.let {
+                    scm {
+                        connection.set(it.connection)
+                        developerConnection.set(it.developerConnection)
+                        url.set(it.url)
+                    }
+                }
             }
         }
     }

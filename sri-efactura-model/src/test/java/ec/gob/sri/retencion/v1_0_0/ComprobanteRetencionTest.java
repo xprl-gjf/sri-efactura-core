@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import static ec.gob.sri.JaxbTestFixture.config;
-
 public class ComprobanteRetencionTest {
 
     private static final String xmlFilename = "ComprobanteRetencion_V1.0.0.xml";
@@ -43,10 +41,10 @@ public class ComprobanteRetencionTest {
 
     private static Stream<Arguments> getInvalidRetencionConfigActions() {
         return Stream.of(
-            config("invalid id", ComprobanteRetencionTest::invalidId, "must match \"\\Qcomprobante\\E\""),
-            config("missing infoTributaria", ComprobanteRetencionTest::missingInfoTributaria, "ComprobanteRetencion.infoTributaria must not be null"),
-            config("empty retencionImpuestos", ComprobanteRetencionTest::emptyRetencionImpuestos, "size must be between 1 and 2147483647"),
-            config("invalid impuesto baseImponible", ComprobanteRetencionTest::invalidImpuestoBaseImponible, "numeric value out of bounds (<14 digits>.<2 digits> expected)")
+            JaxbTestFixture.config("invalid id", ComprobanteRetencionTest::invalidId, "must match \"\\Qcomprobante\\E\""),
+            JaxbTestFixture.config("missing infoTributaria", ComprobanteRetencionTest::missingInfoTributaria, "ComprobanteRetencion.infoTributaria must not be null"),
+            JaxbTestFixture.config("empty retencionImpuestos", ComprobanteRetencionTest::emptyRetencionImpuestos, "size must be between 1 and 2147483647"),
+            JaxbTestFixture.config("invalid impuesto baseImponible", ComprobanteRetencionTest::invalidImpuestoBaseImponible, "numeric value out of bounds (<14 digits>.<2 digits> expected)")
         );
     }
 

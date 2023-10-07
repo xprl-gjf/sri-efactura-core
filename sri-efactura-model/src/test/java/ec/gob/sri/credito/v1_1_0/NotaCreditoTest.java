@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import static ec.gob.sri.JaxbTestFixture.config;
-
 public class NotaCreditoTest {
 
     private static final String xmlFilename = "NotaCredito_V1.1.0.xml";
@@ -43,11 +41,11 @@ public class NotaCreditoTest {
 
     private static Stream<Arguments> getInvalidNotaCreditoConfigActions() {
         return Stream.of(
-                config("invalid id", NotaCreditoTest::invalidId, "must match \"\\Qcomprobante\\E\""),
-                config("missing infoTributaria", NotaCreditoTest::missingInfoTributaria, "NotaCredito.infoTributaria must not be null"),
-                config("empty notaCreditoDetalles", NotaCreditoTest::emptyNotaCreditoDetalles, "size must be between 1 and 2147483647"),
-                config("invalid notaCreditoDetalles", NotaCreditoTest::invalidNotaCreditoDetalles, "must match \"[^\\n]*\""),
-                config("invalid valorModificacion", NotaCreditoTest::invalidValorModificacion, "numeric value out of bounds (<14 digits>.<2 digits> expected)")
+                JaxbTestFixture.config("invalid id", NotaCreditoTest::invalidId, "must match \"\\Qcomprobante\\E\""),
+                JaxbTestFixture.config("missing infoTributaria", NotaCreditoTest::missingInfoTributaria, "NotaCredito.infoTributaria must not be null"),
+                JaxbTestFixture.config("empty notaCreditoDetalles", NotaCreditoTest::emptyNotaCreditoDetalles, "size must be between 1 and 2147483647"),
+                JaxbTestFixture.config("invalid notaCreditoDetalles", NotaCreditoTest::invalidNotaCreditoDetalles, "must match \"[^\\n]*\""),
+                JaxbTestFixture.config("invalid valorModificacion", NotaCreditoTest::invalidValorModificacion, "numeric value out of bounds (<14 digits>.<2 digits> expected)")
         );
     }
 
