@@ -21,6 +21,7 @@ data class ProjectInfo (
         if (version != other.version) return false
         if (projectUrl != other.projectUrl) return false
         if (license != other.license) return false
+        if (scm != other.scm) return false
         if (!developers.contentEquals(other.developers)) return false
 
         return true
@@ -32,6 +33,7 @@ data class ProjectInfo (
         result = 31 * result + projectUrl.hashCode()
         result = 31 * result + developers.contentHashCode()
         result = 31 * result + license.hashCode()
+        result = 31 * result + scm.hashCode()
         return result
     }
 }
